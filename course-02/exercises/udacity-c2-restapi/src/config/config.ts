@@ -1,12 +1,12 @@
 export const config = {
   "dev": {
-    "username": "postgres",
-    "password": "teste",
+    "username": process.env.POSTGRES_USERNAME,
+    "password": process.env.POSTGRES_PASSWORD,
     "database": "udagram",
-    "host": "localhost",
+    "host": process.env.POSTGRES_HOST,
     "dialect": "postgres",
-    "aws_region": "us-east-1",
-    "aws_profile": "udagram",
+    "aws_region": process.env.AWS_REGION,
+    "aws_profile": process.env.AWS_PROFILE,
     "aws_media_bucket": "mpmaia-udacity-dev"
   },
   "prod": {
