@@ -7,13 +7,18 @@ export const config = {
     "dialect": "postgres",
     "aws_region": process.env.AWS_REGION,
     "aws_profile": process.env.AWS_PROFILE,
-    "aws_media_bucket": "mpmaia-udacity-dev"
+    "aws_media_bucket": "mpmaia-udacity-dev",
   },
   "prod": {
-    "username": "",
-    "password": "",
+    "username": process.env.POSTGRES_USERNAME,
+    "password": process.env.POSTGRES_PASSWORD,
     "database": "udagram_prod",
-    "host": "",
-    "dialect": "postgres"
-  }
+    "host": process.env.POSTGRES_HOST,
+    "dialect": "postgres",
+    "aws_region": process.env.AWS_REGION,
+    "aws_profile": process.env.AWS_PROFILE,
+    "aws_media_bucket": "mpmaia-udacity-prod"
+  },
+  "salt_rounds": 10,
+  "jwt_key": process.env.JWT_KEY
 }
