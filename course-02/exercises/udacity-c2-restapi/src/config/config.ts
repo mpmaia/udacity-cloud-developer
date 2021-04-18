@@ -1,3 +1,7 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+//console.log("EnvFile: ", env);
+
 export const config = {
   "dev": {
     "username": process.env.POSTGRES_USERNAME,
@@ -7,7 +11,7 @@ export const config = {
     "dialect": "postgres",
     "aws_region": process.env.AWS_REGION,
     "aws_profile": process.env.AWS_PROFILE,
-    "aws_media_bucket": "udacity-595541697208-mpmaia-dev",
+    "aws_media_bucket": process.env.AWS_BUCKET,
   },
   "prod": {
     "username": process.env.POSTGRES_USERNAME,
@@ -17,7 +21,7 @@ export const config = {
     "dialect": "postgres",
     "aws_region": process.env.AWS_REGION,
     "aws_profile": process.env.AWS_PROFILE,
-    "aws_media_bucket": "udacity-595541697208-mpmaia-prod"
+    "aws_media_bucket": process.env.AWS_BUCKET
   },
   "salt_rounds": 10,
   "jwt_key": process.env.JWT_KEY

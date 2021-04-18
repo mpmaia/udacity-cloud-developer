@@ -1,7 +1,3 @@
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-//console.log("EnvFile: ", env);
-
 import express from 'express';
 import { sequelize } from './sequelize';
 
