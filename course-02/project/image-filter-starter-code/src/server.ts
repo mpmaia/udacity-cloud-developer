@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import {requireAuth} from "./auth";
 
-const IMAGE_REGEX = /^http(s)+:\/\/.*$/;
+const URL_REGEX = /^http(s)+:\/\/.*$/;
 
 (async () => {
 
@@ -29,26 +29,33 @@ const IMAGE_REGEX = /^http(s)+:\/\/.*$/;
     //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
     app.get("/filteredimage",
         requireAuth,
-        async (req, res) => {
+        async (req, res, next) => {
 
         const imageUrl = req.query.image_url;
-        if (!imageUrl || !imageUrl.match(IMAGE_REGEX)) {
-            res.sendStatus(500).send({message: "Invalid URL."});
+        if (!imageUrl || !imageUrl.match(URL_REGEX)) {
+            res.sendStatus(422).send({message: "Invalid or unsupported URL."});
             return;
         }
 
-        const imageFile = await filterImageFromURL(imageUrl);
-        res.sendFile(imageFile, function (err) {
-            if (err) {
-                res.sendStatus(500).send({message: "Failed to send file."});
-            } else {
+        try {
+            const imageFile = await filterImageFromURL(imageUrl);
+            res.sendFile(imageFile, function (err) {
+
                 try {
                     deleteLocalFiles([imageFile]);
                 } catch (e) {
                     console.log("error removing ", imageFile);
                 }
-            }
-        });
+
+                if (err) {
+                    console.log("Error processing file", imageFile);
+                    next(err);
+                }
+            });
+        } catch(e) {
+            console.log(e);
+            res.sendStatus(500).send({message: "Failed to process image: " + e.message})
+        }
     });
 
     // Root Endpoint
