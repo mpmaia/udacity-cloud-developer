@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "1e357187-a290-4efd-b818-98e64bc59eac",
 		"name": "cloud-cdnd-c2-final",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -10,9 +10,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTYxODcxMDE2M30.JoaOLS9fC3skVkpqba1vq13ALD4yyd-RUsNcfhWXhTE"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsImlhdCI6MTYxODcxMDE2M30.JoaOLS9fC3skVkpqba1vq13ALD4yyd-RUsNcfhWXhTE",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -59,7 +63,7 @@
 	"variable": [
 		{
 			"key": "HOST",
-			"value": "localhost:8082"
+			"value": "image-filter.mpmaia.com.br"
 		}
 	]
 }
